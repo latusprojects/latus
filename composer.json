@@ -1,0 +1,26 @@
+{
+    "name": "latusprojects/latus",
+    "type": "library",
+    "description": "",
+    "authors": [
+        {
+            "name": "Max Latussek",
+            "email": "latusschnecke@gmail.com"
+        }
+    ],
+    "require": {
+        "laravel/framework": "8.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Latus\\Latus\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Latus\\Latus\\LatusServiceProvider"
+            ]
+        }
+    }
+}
