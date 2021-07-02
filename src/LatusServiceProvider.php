@@ -3,6 +3,7 @@
 namespace Latus\Latus;
 
 use Illuminate\Support\ServiceProvider;
+use Latus\Latus\Console\Commands\Install;
 
 class LatusServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,9 @@ class LatusServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->commands([
+            Install::class,
+        ]);
     }
 
     /**
