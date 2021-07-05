@@ -17,7 +17,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Latus\\Latus\\": "src/"
+      "Latus\\Latus\\": "src/",
+      "Latus\\Database\\Seeders\\": "database/seeders/"
     }
   },
   "extra": {
