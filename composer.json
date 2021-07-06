@@ -15,10 +15,18 @@
     "latusprojects/latus-permissions": "dev-master",
     "latusprojects/latus-installer": "dev-master"
   },
+  "require-dev": {
+    "latusprojects/latus-phpunit-commons": "dev-master"
+  },
   "autoload": {
     "psr-4": {
       "Latus\\Latus\\": "src/",
       "Latus\\Database\\Seeders\\": "database/seeders/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Latus\\Latus\\Tests\\": "tests/"
     }
   },
   "extra": {
