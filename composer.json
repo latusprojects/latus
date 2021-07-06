@@ -12,11 +12,13 @@
     "php": "^8.0",
     "laravel/framework": "8.*",
     "latusprojects/latus-plugins": "dev-master",
+    "latusprojects/latus-model-repositories": "dev-master",
     "latusprojects/latus-permissions": "dev-master",
     "latusprojects/latus-installer": "dev-master"
   },
   "require-dev": {
-    "latusprojects/latus-phpunit-commons": "dev-master"
+    "latusprojects/latus-phpunit-commons": "dev-master",
+    "phpunit/phpunit": "^9.5.0"
   },
   "autoload": {
     "psr-4": {
