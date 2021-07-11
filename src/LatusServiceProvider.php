@@ -3,9 +3,6 @@
 namespace Latus\Latus;
 
 use Illuminate\Support\ServiceProvider;
-use Latus\Latus\Models\User;
-use Latus\Latus\Repositories\Contracts\UserRepository as UserRepositoryContract;
-use Latus\Plugins\Repositories\Eloquent\UserRepository;
 
 class LatusServiceProvider extends ServiceProvider
 {
@@ -16,13 +13,7 @@ class LatusServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (!$this->app->bound(UserRepositoryContract::class)) {
-            $this->app->bind(UserRepositoryContract::class, UserRepository::class);
-        }
 
-        if (!$this->app->bound(User::class)) {
-            $this->app->bind(User::class, User::class);
-        }
     }
 
     /**
