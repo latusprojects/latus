@@ -60,5 +60,10 @@
         "Latus\\Latus\\LatusServiceProvider"
       ]
     }
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "@php ./vendor/bin/testbench package:discover --ansi"
+    ]
   }
 }
