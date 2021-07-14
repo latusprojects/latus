@@ -11,9 +11,9 @@
   "require": {
     "php": "^8.0",
     "laravel/framework": "8.*",
-    "latusprojects/latus-plugins": "dev-master",
-    "latusprojects/latus-model-repositories": "dev-master",
-    "latusprojects/latus-permissions": "dev-master",
+    "latusprojects/latus-plugins": "dev-develop",
+    "latusprojects/latus-model-repositories": "dev-develop",
+    "latusprojects/latus-permissions": "dev-develop",
     "latusprojects/latus-installer": "dev-master"
   },
   "require-dev": {
