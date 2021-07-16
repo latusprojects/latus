@@ -14,7 +14,8 @@
     "latusprojects/latus-plugins": "dev-develop",
     "latusprojects/latus-model-repositories": "dev-develop",
     "latusprojects/latus-permissions": "dev-develop",
-    "latusprojects/latus-installer": "dev-develop"
+    "latusprojects/latus-installer": "dev-develop",
+    "latusprojects/latus-ui": "dev-develop"
   },
   "require-dev": {
     "latusprojects/latus-phpunit-commons": "dev-master",
