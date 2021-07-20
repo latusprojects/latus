@@ -33,28 +33,6 @@
       "Latus\\Latus\\Tests\\": "tests/"
     }
   },
-  "repositories": {
-    "0": {
-      "type": "path",
-      "url": "../latus-plugins"
-    },
-    "1": {
-      "type": "path",
-      "url": "../latus-model-repositories"
-    },
-    "2": {
-      "type": "path",
-      "url": "../latus-permissions"
-    },
-    "3": {
-      "type": "path",
-      "url": "../latus-installer"
-    },
-    "4": {
-      "type": "path",
-      "url": "../latus-phpunit-commons"
-    }
-  },
   "extra": {
     "laravel": {
       "providers": [
@@ -66,5 +44,12 @@
     "post-autoload-dump": [
       "@php ./vendor/bin/testbench package:discover --ansi"
     ]
-  }
+  },
+  "repositories": {
+    "0": {
+      "type": "composer",
+      "url": "https://latusprojects.repo.repman.io"
+    }
+  },
+  "minimum-stability": "dev"
 }
