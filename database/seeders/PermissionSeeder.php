@@ -76,6 +76,14 @@ class PermissionSeeder extends Seeder
         ['name' => 'plugin.edit', 'guard' => 'web'],
         ['name' => 'plugin.destroy', 'guard' => 'web'],
 
+        /* Theme-Model */
+        ['name' => 'theme.*', 'guard' => 'web'],
+        ['name' => 'theme.index', 'guard' => 'web'],
+        ['name' => 'theme.create', 'guard' => 'web'],
+        ['name' => 'theme.show', 'guard' => 'web'],
+        ['name' => 'theme.edit', 'guard' => 'web'],
+        ['name' => 'theme.destroy', 'guard' => 'web'],
+
         /* ComposerRepository-Model */
         ['name' => 'repository.*', 'guard' => 'web'],
         ['name' => 'repository.index', 'guard' => 'web'],
