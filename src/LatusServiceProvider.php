@@ -3,9 +3,13 @@
 namespace Latus\Latus;
 
 use Illuminate\Support\ServiceProvider;
+use Latus\Database\Seeders\DatabaseSeeder;
+use Latus\Installer\Providers\Traits\RegistersSeeders;
 
 class LatusServiceProvider extends ServiceProvider
 {
+    use RegistersSeeders;
+
     /**
      * Register services.
      *
@@ -13,7 +17,9 @@ class LatusServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        $this->registerSeeders([
+            DatabaseSeeder::class
+        ]);
     }
 
     /**
