@@ -1,6 +1,6 @@
 <?php
 
-namespace Latus\Latus;
+namespace Latus\Latus\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Latus\Database\Seeders\DatabaseSeeder;
