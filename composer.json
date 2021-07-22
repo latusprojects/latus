@@ -18,7 +18,6 @@
     "latusprojects/latus-ui": "dev-develop"
   },
   "require-dev": {
-    "latusprojects/latus-phpunit-commons": "dev-master",
     "phpunit/phpunit": "^9.5.0",
     "orchestra/testbench": "v6.19.0"
   },
