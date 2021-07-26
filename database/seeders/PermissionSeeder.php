@@ -15,6 +15,10 @@ class PermissionSeeder extends Seeder
     }
 
     public const PERMISSIONS = [
+        /* Modules */
+        ['name' => 'module.admin', 'guard' => 'web'],
+        ['name' => 'module.web', 'guard' => 'web'],
+
         /* Dashboards */
         ['name' => 'dashboard.*', 'guard' => 'web'],
         ['name' => 'dashboard.overview', 'guard' => 'web'],
