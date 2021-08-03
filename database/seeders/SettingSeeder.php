@@ -6,7 +6,7 @@ namespace Latus\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Latus\Settings\Services\SettingService;
-use Latus\UI\Modules\Contracts\AdminModule;
+use Latus\Latus\Modules\Contracts\AdminModule;
 
 class SettingSeeder extends Seeder
 {
