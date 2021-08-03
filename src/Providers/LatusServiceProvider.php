@@ -5,11 +5,14 @@ namespace Latus\Latus\Providers;
 use Illuminate\Support\ServiceProvider;
 use Latus\Database\Seeders\DatabaseSeeder;
 use Latus\Installer\Providers\Traits\RegistersSeeders;
+use Latus\Latus\Http\Controllers\AdminController;
+use Latus\Latus\Modules\Contracts\AdminModule;
+use Latus\UI\Providers\Traits\DefinesModules;
 use Latus\UI\Widgets\AdminNav;
 
 class LatusServiceProvider extends ServiceProvider
 {
-    use RegistersSeeders;
+    use RegistersSeeders, DefinesModules;
 
     /**
      * Register services.
@@ -20,6 +23,13 @@ class LatusServiceProvider extends ServiceProvider
     {
         $this->registerSeeders([
             DatabaseSeeder::class
+        ]);
+
+        $this->defineModules([
+            AdminModule::class => [
+                'alias' => 'admin',
+                'controller' => [AdminController::class, 'showPage'],
+            ]
         ]);
     }
 
