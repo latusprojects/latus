@@ -26,7 +26,7 @@ class AdminController extends Controller
         }
 
         try {
-            return $module->resolvesView()->with(['admin-nav' => app()->make('admin-nav'), 'content' => $viewTarget->render()]);
+            return $module->getPage('page')->resolvesView()->with(['admin-nav' => app()->make('admin-nav'), 'content' => $viewTarget->render()]);
         } catch (\Throwable $e) {
             return response('Service Unavailable', 503);
         }
