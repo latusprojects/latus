@@ -17,7 +17,8 @@
     "latusprojects/latus-installer": "0.1.*",
     "latusprojects/latus-ui": "0.1.*",
     "latusprojects/latus-content": "0.1.*",
-    "latusprojects/latus-prioritized-providers": "0.1.*"
+    "latusprojects/latus-prioritized-providers": "0.1.*",
+    "latusprojects/latus-composer-plugins": "0.1.*"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5.0",
