@@ -22,7 +22,8 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5.0",
-    "orchestra/testbench": "v6.19.0"
+    "orchestra/testbench": "v6.19.0",
+    "nunomaduro/larastan": "^0.7.12"
   },
   "autoload": {
     "psr-4": {
