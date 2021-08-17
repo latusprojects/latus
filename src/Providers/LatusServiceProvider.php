@@ -2,11 +2,13 @@
 
 namespace Latus\Latus\Providers;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Latus\Database\Seeders\DatabaseSeeder;
 use Latus\Installer\Providers\Traits\RegistersSeeders;
 use Latus\Latus\Http\Controllers\AdminController;
 use Latus\Latus\Modules\Contracts\AdminModule;
+use Latus\UI\Events\AdminNavDefined;
 use Latus\UI\Providers\Traits\DefinesModules;
 use Latus\UI\Widgets\AdminNav;
 
@@ -89,14 +91,15 @@ class LatusServiceProvider extends ServiceProvider
 
     protected function fillAdminNav()
     {
-        /**
-         * @var AdminNav $adminNav
-         */
-        $adminNav = app('admin-nav');
 
-        foreach ($this->getAdminNavItems() as $item) {
-            $adminNav->getItems()->add($item);
-        }
+        Event::listen(function (AdminNavDefined $event) {
+
+            foreach ($this->getAdminNavItems() as $item) {
+                $event->adminNav->getItems()->add($item);
+            }
+
+        });
+
     }
 
     /**
