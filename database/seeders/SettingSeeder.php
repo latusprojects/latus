@@ -19,7 +19,8 @@ class SettingSeeder extends Seeder
     public const SETTINGS = [
         ['key' => 'active_themes', 'value' => ['latusprojects/latus-2021-theme']],
         ['key' => 'active_modules', 'value' => [AdminModule::class => 'Latus\Theme2021\UI\Modules\Admin']],
-        ['key' => 'disabled_modules', 'value' => []]
+        ['key' => 'disabled_modules', 'value' => []],
+        ['key' => 'main_repository_name', 'value' => 'latusprojects.repo.repman.io']
     ];
 
     /**
