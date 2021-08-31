@@ -5,7 +5,9 @@ namespace Latus\Latus\Http\Controllers;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Latus\Latus\Http\Requests\AuthenticateUserRequest;
 use Latus\Latus\Http\Requests\StoreUserRequest;
 use Latus\Latus\Modules\Contracts\AuthModule;
 use Latus\Permissions\Services\UserService;
@@ -87,11 +89,25 @@ class AuthController extends Controller
      * This route also handles multi-factor login-submit requests
      *
      * @Route("/auth/submit", methods={"POST"})
-     * @return Response
+     * @param AuthenticateUserRequest $request
+     * @return Response|JsonResponse
      */
-    public function authenticate(): Response
+    public function authenticate(AuthenticateUserRequest $request): Response|JsonResponse
     {
+        if (Auth::attempt($request->validated())) {
+            $request->session()->regenerate();
 
+            return \response()->json([
+                'message' => 'user authenticated',
+                'data' => [
+                    'prefer_target' => false
+                ]
+            ]);
+        }
+
+        return \response('Not Found', 404)->json([
+            'message' => 'user not found'
+        ]);
     }
 
     /**
