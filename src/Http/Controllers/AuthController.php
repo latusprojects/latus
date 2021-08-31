@@ -3,9 +3,12 @@
 namespace Latus\Latus\Http\Controllers;
 
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
+use Latus\Latus\Http\Requests\StoreUserRequest;
 use Latus\Latus\Modules\Contracts\AuthModule;
+use Latus\Permissions\Services\UserService;
 use Latus\UI\Components\Contracts\ModuleComponent;
 use Latus\UI\Services\ComponentService;
 
@@ -106,10 +109,26 @@ class AuthController extends Controller
      * Attempts to store a new user and returns a json-response containing the status and additional messages
      *
      * @Route("/auth/store", methods={"PUT"})
-     * @return Response
+     * @param StoreUserRequest $request
+     * @param UserService $userService
+     * @return Response|JsonResponse
      */
-    public function store(): Response
+    public function store(StoreUserRequest $request, UserService $userService): Response|JsonResponse
     {
+        $validatedInput = $request->validated();
+
+        try {
+            $user = $userService->createUser($validatedInput);
+        } catch (\InvalidArgumentException $e) {
+            return \response('Bad Request', 400);
+        }
+
+        return \response()->json([
+            'message' => 'user created',
+            'data' => [
+                'created_at' => $user->getCreatedAtColumn()
+            ]
+        ]);
 
     }
 }
