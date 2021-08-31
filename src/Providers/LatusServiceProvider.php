@@ -7,7 +7,9 @@ use Illuminate\Support\ServiceProvider;
 use Latus\Database\Seeders\DatabaseSeeder;
 use Latus\Installer\Providers\Traits\RegistersSeeders;
 use Latus\Latus\Http\Controllers\AdminController;
+use Latus\Latus\Http\Controllers\AuthController;
 use Latus\Latus\Modules\Contracts\AdminModule;
+use Latus\Latus\Modules\Contracts\AuthModule;
 use Latus\UI\Events\AdminNavDefined;
 use Latus\UI\Providers\Traits\DefinesModules;
 use Latus\UI\Widgets\AdminNav;
@@ -31,7 +33,11 @@ class LatusServiceProvider extends ServiceProvider
             AdminModule::class => [
                 'alias' => 'admin',
                 'controller' => [AdminController::class, 'showPage'],
-            ]
+            ],
+            AuthModule::class => [
+                'alias' => 'auth',
+                'controller' => AuthController::class,
+            ],
         ]);
     }
 
