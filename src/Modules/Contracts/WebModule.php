@@ -4,6 +4,8 @@
 namespace Latus\Latus\Modules\Contracts;
 
 
-interface WebModule
+use Latus\UI\Components\Contracts\ModuleComponent;
+
+interface WebModule extends ModuleComponent
 {
 }

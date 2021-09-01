@@ -4,6 +4,8 @@
 namespace Latus\Latus\Modules\Contracts;
 
 
-interface AdminModule
+use Latus\UI\Components\Contracts\ModuleComponent;
+
+interface AdminModule extends ModuleComponent
 {
 }
