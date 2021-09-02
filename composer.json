@@ -37,6 +37,13 @@
       "Latus\\Latus\\Tests\\": "tests/"
     }
   },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Latus\\Latus\\Providers\\RouteServiceProvider"
+      ]
+    }
+  },
   "scripts": {
     "post-autoload-dump": [
       "@php ./vendor/bin/testbench package:discover --ansi"
