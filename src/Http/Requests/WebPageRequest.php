@@ -24,10 +24,12 @@ class WebPageRequest extends Request
 
     public function getPageContent(): Content|null
     {
+        $pageId = request()->route()->parameter('page_id');
+
         /**
          * @var Content $content
          */
-        $content = $this->getContentService()->find($this->input('page_id'));
+        $content = $this->getContentService()->find($pageId);
 
         if (!$content || $content->type !== 'web-page') {
             return null;
