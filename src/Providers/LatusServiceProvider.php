@@ -39,6 +39,8 @@ class LatusServiceProvider extends ServiceProvider
                 'controller' => AuthController::class,
             ],
         ]);
+
+        $this->mergeConfigFrom(__DIR__ . '/../../config/routes.php', 'latus-routes');
     }
 
     protected function getAdminNavItems(): array
