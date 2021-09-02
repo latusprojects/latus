@@ -27,12 +27,12 @@ class WebPageRequest extends Request
         /**
          * @var Content $content
          */
-        $content = $this->contentService->find($this->input('page_id'));
+        $content = $this->getContentService()->find($this->input('page_id'));
 
         if (!$content || $content->type !== 'web-page') {
             return null;
         }
-        
+
         return $content;
     }
 }
