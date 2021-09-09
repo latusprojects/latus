@@ -22,14 +22,18 @@ class AdminController extends Controller
              */
             $module = $componentService->getActiveModule(AdminModule::class);
         } catch (BindingResolutionException $e) {
-            return response('Service Unavailable', 503);
+            abort(503);
         }
 
+
+        $pageView = null;
         try {
-            return $module->getPage('page')->resolvesView()->with(['admin-nav' => app()->make('admin-nav'), 'content' => $viewTarget->render()]);
+            $pageView = $module->getPage('page')->resolvesView()->with(['admin-nav' => app()->make('admin-nav'), 'content' => $viewTarget->render()]);
         } catch (\Throwable $e) {
-            return response('Service Unavailable', 503);
+            abort(503);
         }
+
+        return $pageView;
 
     }
 }
