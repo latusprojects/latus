@@ -4,10 +4,21 @@ namespace Latus\Latus\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Latus\Latus\Contracts\Dashboard;
+use Latus\Latus\Policies\DashboardPolicy;
 use Latus\Permissions\Models\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected $policies = [
+        Dashboard::class => DashboardPolicy::class,
+    ];
+
     /**
      * Register any authentication / authorization services.
      *
