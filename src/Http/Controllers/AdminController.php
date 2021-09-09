@@ -14,13 +14,19 @@ use Latus\UI\Services\ComponentService;
 
 class AdminController extends Controller
 {
-    public function showPage(Request $request, ComponentService $componentService, View $viewTarget): Response|View
+    public function __construct(
+        protected ComponentService $componentService
+    )
+    {
+    }
+
+    protected function returnView(View $viewTarget): Response|View
     {
         try {
             /**
              * @var ModuleComponent $module
              */
-            $module = $componentService->getActiveModule(AdminModule::class);
+            $module = $this->componentService->getActiveModule(AdminModule::class);
         } catch (BindingResolutionException $e) {
             abort(503);
         }
