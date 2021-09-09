@@ -5,8 +5,6 @@ namespace Latus\Latus\Http\Controllers;
 
 
 use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Latus\UI\Components\Contracts\ModuleComponent;
 use Latus\Latus\Modules\Contracts\AdminModule;
@@ -20,7 +18,7 @@ class AdminController extends Controller
     {
     }
 
-    protected function returnView(View $viewTarget): Response|View
+    protected function returnView(View $viewTarget): View
     {
         try {
             /**
