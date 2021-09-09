@@ -5,31 +5,45 @@ namespace Latus\Latus\Http\Controllers;
 
 
 use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Latus\UI\Components\Contracts\ModuleComponent;
 use Latus\Latus\Modules\Contracts\AdminModule;
 use Latus\UI\Services\ComponentService;
+use Latus\UI\Widgets\AdminNav;
 
 class AdminController extends Controller
 {
-    public function showPage(Request $request, ComponentService $componentService, View $viewTarget): Response|View
+    public function __construct(
+        protected ComponentService $componentService,
+        protected AdminNav         $adminNav
+    )
+    {
+    }
+
+    protected function returnView(View $viewTarget, string $reference = null): View
     {
         try {
             /**
              * @var ModuleComponent $module
              */
-            $module = $componentService->getActiveModule(AdminModule::class);
+            $module = $this->componentService->getActiveModule(AdminModule::class);
         } catch (BindingResolutionException $e) {
-            return response('Service Unavailable', 503);
+            abort(503);
         }
 
+
+        $pageView = null;
         try {
-            return $module->getPage('page')->resolvesView()->with(['admin-nav' => app()->make('admin-nav'), 'content' => $viewTarget->render()]);
+            if ($reference) {
+                $this->adminNav->setReference($reference);
+            }
+
+            $pageView = $module->getPage('page')->resolvesView()->with(['admin-nav' => app()->make('admin-nav'), 'content' => $viewTarget->render()]);
         } catch (\Throwable $e) {
-            return response('Service Unavailable', 503);
+            abort(503);
         }
+
+        return $pageView;
 
     }
 }

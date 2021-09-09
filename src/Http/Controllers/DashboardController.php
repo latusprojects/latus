@@ -1,0 +1,26 @@
+<?php
+
+namespace Latus\Latus\Http\Controllers;
+
+
+use Illuminate\Auth\Access\AuthorizationException;
+use Latus\Latus\Contracts\Dashboard;
+use Illuminate\View\View;
+
+class DashboardController extends AdminController
+{
+
+    /**
+     * Show the overview dashboard.
+     *
+     * @return View
+     *
+     * @throws AuthorizationException
+     */
+    public function showOverview(): View
+    {
+        $this->authorize('view', [Dashboard::class, 'overview']);
+
+        return $this->returnView(\view('latus::admin.dashboard.overview'), 'dashboard.overview');
+    }
+}
