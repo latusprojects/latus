@@ -9,16 +9,18 @@ use Illuminate\View\View;
 use Latus\UI\Components\Contracts\ModuleComponent;
 use Latus\Latus\Modules\Contracts\AdminModule;
 use Latus\UI\Services\ComponentService;
+use Latus\UI\Widgets\AdminNav;
 
 class AdminController extends Controller
 {
     public function __construct(
-        protected ComponentService $componentService
+        protected ComponentService $componentService,
+        protected AdminNav         $adminNav
     )
     {
     }
 
-    protected function returnView(View $viewTarget): View
+    protected function returnView(View $viewTarget, string $reference = null): View
     {
         try {
             /**
@@ -32,6 +34,10 @@ class AdminController extends Controller
 
         $pageView = null;
         try {
+            if ($reference) {
+                $this->adminNav->setReference($reference);
+            }
+
             $pageView = $module->getPage('page')->resolvesView()->with(['admin-nav' => app()->make('admin-nav'), 'content' => $viewTarget->render()]);
         } catch (\Throwable $e) {
             abort(503);
