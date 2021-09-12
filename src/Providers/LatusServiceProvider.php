@@ -12,7 +12,6 @@ use Latus\Latus\Modules\Contracts\AdminModule;
 use Latus\Latus\Modules\Contracts\AuthModule;
 use Latus\UI\Events\AdminNavDefined;
 use Latus\UI\Providers\Traits\DefinesModules;
-use Latus\UI\Widgets\AdminNav;
 
 class LatusServiceProvider extends ServiceProvider
 {

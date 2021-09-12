@@ -40,6 +40,7 @@
   "extra": {
     "laravel": {
       "providers": [
+        "Latus\\Latus\\Providers\\LatusServiceProvider",
         "Latus\\Latus\\Providers\\RouteServiceProvider",
         "Latus\\Latus\\Providers\\AuthServiceProvider"
       ]
