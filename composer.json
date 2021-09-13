@@ -17,7 +17,7 @@
     "latusprojects/latus-installer": "^0.1.22",
     "latusprojects/latus-ui": "0.1.*",
     "latusprojects/latus-content": "0.1.*",
-    "latusprojects/latus-composer-plugins": "0.2.*",
+    "latusprojects/latus-composer-plugins": "^0.2.3",
     "latusprojects/latus-laravel-application": "0.1.*",
     "latusprojects/latus-permalink": "0.1.*"
   },
