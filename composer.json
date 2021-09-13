@@ -15,7 +15,7 @@
     "latusprojects/latus-model-repositories": "^0.1.1",
     "latusprojects/latus-permissions": "^0.2.5",
     "latusprojects/latus-installer": "^0.1.22",
-    "latusprojects/latus-ui": "0.1.*",
+    "latusprojects/latus-ui": "^0.1.23",
     "latusprojects/latus-content": "0.1.*",
     "latusprojects/latus-composer-plugins": "^0.2.3",
     "latusprojects/latus-laravel-application": "^0.1.7",
