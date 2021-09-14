@@ -10,6 +10,7 @@ use Latus\UI\Components\Contracts\ModuleComponent;
 use Latus\Latus\Modules\Contracts\AdminModule;
 use Latus\UI\Services\ComponentService;
 use Latus\UI\Widgets\AdminNav;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AdminController extends Controller
 {
@@ -29,6 +30,8 @@ class AdminController extends Controller
             $module = $this->componentService->getActiveModule(AdminModule::class);
         } catch (BindingResolutionException $e) {
             abort(503);
+        } catch (NotFoundHttpException $e) {
+            abort(404);
         }
 
 
