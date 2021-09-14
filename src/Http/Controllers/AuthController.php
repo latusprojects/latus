@@ -29,15 +29,17 @@ class AuthController extends Controller
     /**
      * Returns the auth-module or null if no binding for it exists in the app-container
      *
-     * @return ModuleComponent|null
+     * @return ModuleComponent
      */
-    protected function getAuthModuleOrAbort(): ModuleComponent|null
+    protected function getAuthModuleOrAbort(): ModuleComponent
     {
         if (!isset($this->{'authModule'})) {
             try {
                 $this->authModule = $this->componentService->getActiveModule(AuthModule::class);
             } catch (BindingResolutionException $e) {
-                return null;
+                abort(503);
+            } catch (NotFoundHttpException $e) {
+                abort(404);
             }
         }
 
