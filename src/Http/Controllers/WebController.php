@@ -2,16 +2,18 @@
 
 namespace Latus\Latus\Http\Controllers;
 
-use Illuminate\Http\Response;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\View\View;
 use Latus\Latus\Http\Requests\WebPageRequest;
 use Latus\Latus\Modules\Contracts\WebModule;
+use Latus\UI\Components\Contracts\ModuleComponent;
+use Latus\UI\Services\ComponentService;
 
 class WebController extends Controller
 {
 
     public function __construct(
-        protected WebModule $webModule
+        protected ComponentService $componentService
     )
     {
     }
@@ -25,6 +27,10 @@ class WebController extends Controller
         $page = $this->webModule->getPage('page');
         $page->setContent($content);
 
-        return $page->resolvesView() ?? \response('Not Found', 404);
+        if (!($view = $page->resolvesView())) {
+            abort(404);
+        }
+
+        return $view;
     }
 }
