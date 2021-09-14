@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Latus\Latus\Http\Controllers\AuthController;
 use Latus\Latus\Http\Controllers\DashboardController;
 use Latus\Latus\Http\Controllers\WebController;
 use Latus\Latus\Http\Middleware\VerifyUserCanViewAdminModule;
@@ -27,11 +28,33 @@ Route::middleware(['web'])->group(function () {
  * Module: Admin
  * Routes for basic functionality
  */
-Route::middleware(['web', VerifyUserCanViewAdminModule::class])->group(function () {
+Route::middleware(['web', 'auth', VerifyUserCanViewAdminModule::class])->group(function () {
 
     $adminRoutesPrefix = config('latus-routes.admin_routes_prefix');
 
     Route::prefix($adminRoutesPrefix)->group(function () {
         Route::get('/dashboard/overview', [DashboardController::class, 'showOverview']);
     });
+});
+
+/*
+ * Module: Auth
+ * Routes for basic functionality
+ */
+Route::middleware(['web'])->group(function () {
+
+    $authRoutes = function () {
+        Route::get('/login', [AuthController::class, 'showLogin']);
+        Route::get('/register', [AuthController::class, 'showRegister']);
+        Route::get('/multiFactorLogin', [AuthController::class, 'showMultiFactorLogin']);
+
+    };
+
+    $authRoutesPrefix = config('latus-routes.auth_routes_prefix');
+    if ($authRoutesPrefix && $authRoutesPrefix !== '') {
+        Route::prefix($authRoutesPrefix)->group($authRoutes);
+    } else {
+        $authRoutes();
+    }
+
 });

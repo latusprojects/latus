@@ -52,14 +52,18 @@ class AuthController extends Controller
     protected function returnPageViewOrErrorResponse(string $page): Response|View
     {
         if (!$this->getAuthModule()) {
-            return response('Service Unavailable', 503);
+            abort(503);
         }
 
+        $pageView = null;
+
         try {
-            return $this->getAuthModule()->getPage($page)->resolvesView();
+            $pageView = $this->getAuthModule()->getPage($page)->resolvesView();
         } catch (\Throwable $e) {
-            return response('Service Unavailable', 503);
+            abort(503);
         }
+
+        return $pageView;
     }
 
     /**
@@ -136,7 +140,9 @@ class AuthController extends Controller
         try {
             $user = $userService->createUser($validatedInput);
         } catch (\InvalidArgumentException $e) {
-            return \response('Bad Request', 400);
+            return \response('Bad Request', 400)->json([
+                'message' => 'user-service attribute validation failed'
+            ]);
         }
 
         return \response()->json([
