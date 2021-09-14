@@ -13,6 +13,7 @@ use Latus\Latus\Modules\Contracts\AuthModule;
 use Latus\Permissions\Services\UserService;
 use Latus\UI\Components\Contracts\ModuleComponent;
 use Latus\UI\Services\ComponentService;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AuthController extends Controller
 {
@@ -28,15 +29,17 @@ class AuthController extends Controller
     /**
      * Returns the auth-module or null if no binding for it exists in the app-container
      *
-     * @return ModuleComponent|null
+     * @return ModuleComponent
      */
-    protected function getAuthModule(): ModuleComponent|null
+    protected function getAuthModuleOrAbort(): ModuleComponent
     {
         if (!isset($this->{'authModule'})) {
             try {
                 $this->authModule = $this->componentService->getActiveModule(AuthModule::class);
             } catch (BindingResolutionException $e) {
-                return null;
+                abort(503);
+            } catch (NotFoundHttpException $e) {
+                abort(404);
             }
         }
 
@@ -49,16 +52,12 @@ class AuthController extends Controller
      * @param string $page
      * @return Response|View
      */
-    protected function returnPageViewOrErrorResponse(string $page): Response|View
+    protected function getPageViewOrAbort(string $page): Response|View
     {
-        if (!$this->getAuthModule()) {
-            abort(503);
-        }
-
         $pageView = null;
 
         try {
-            $pageView = $this->getAuthModule()->getPage($page)->resolvesView();
+            $pageView = $this->getAuthModuleOrAbort()->getPage($page)->resolvesView();
         } catch (\Throwable $e) {
             abort(503);
         }
@@ -74,7 +73,7 @@ class AuthController extends Controller
      */
     public function showLogin(): Response|View
     {
-        return $this->returnPageViewOrErrorResponse('login');
+        return $this->getPageViewOrAbort('login');
     }
 
     /**
@@ -85,7 +84,7 @@ class AuthController extends Controller
      */
     public function showMultiFactorLogin(): Response|View
     {
-        return $this->returnPageViewOrErrorResponse('multiFactorLogin');
+        return $this->getPageViewOrAbort('multiFactorLogin');
     }
 
     /**
@@ -122,7 +121,7 @@ class AuthController extends Controller
      */
     public function showRegister(): Response|View
     {
-        return $this->returnPageViewOrErrorResponse('register');
+        return $this->getPageViewOrAbort('register');
     }
 
     /**

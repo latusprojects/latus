@@ -8,6 +8,7 @@ use Latus\Latus\Http\Requests\WebPageRequest;
 use Latus\Latus\Modules\Contracts\WebModule;
 use Latus\UI\Components\Contracts\ModuleComponent;
 use Latus\UI\Services\ComponentService;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class WebController extends Controller
 {
@@ -27,6 +28,8 @@ class WebController extends Controller
             $module = $this->componentService->getActiveModule(WebModule::class);
         } catch (BindingResolutionException $e) {
             abort(503);
+        } catch (NotFoundHttpException $e) {
+            abort(404);
         }
 
         if (!($content = $request->getPageContent())) {
