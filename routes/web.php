@@ -43,18 +43,11 @@ Route::middleware(['web', 'auth', VerifyUserCanViewAdminModule::class])->group(f
  */
 Route::middleware(['web'])->group(function () {
 
-    $authRoutes = function () {
+    $authRoutesPrefix = config('latus-routes.auth_routes_prefix');
+
+    Route::prefix($authRoutesPrefix)->group(function () {
         Route::get('/login', [AuthController::class, 'showLogin']);
         Route::get('/register', [AuthController::class, 'showRegister']);
         Route::get('/multiFactorLogin', [AuthController::class, 'showMultiFactorLogin']);
-
-    };
-
-    $authRoutesPrefix = config('latus-routes.auth_routes_prefix');
-    if ($authRoutesPrefix && $authRoutesPrefix !== '') {
-        Route::prefix($authRoutesPrefix)->group($authRoutes);
-    } else {
-        $authRoutes();
-    }
-
+    });
 });
