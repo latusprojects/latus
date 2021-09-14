@@ -8,8 +8,10 @@ use Latus\Database\Seeders\DatabaseSeeder;
 use Latus\Installer\Providers\Traits\RegistersSeeders;
 use Latus\Latus\Http\Controllers\AdminController;
 use Latus\Latus\Http\Controllers\AuthController;
+use Latus\Latus\Http\Controllers\WebController;
 use Latus\Latus\Modules\Contracts\AdminModule;
 use Latus\Latus\Modules\Contracts\AuthModule;
+use Latus\Latus\Modules\Contracts\WebModule;
 use Latus\UI\Events\AdminNavDefined;
 use Latus\UI\Providers\Traits\DefinesModules;
 
@@ -36,6 +38,10 @@ class LatusServiceProvider extends ServiceProvider
             AuthModule::class => [
                 'alias' => 'auth',
                 'controller' => AuthController::class,
+            ],
+            WebModule::class => [
+                'alias' => 'web',
+                'controller' => WebController::class,
             ],
         ]);
 
