@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Latus\Latus\Http\Controllers\AuthController;
 use Latus\Latus\Http\Controllers\DashboardController;
 use Latus\Latus\Http\Controllers\WebController;
 use Latus\Latus\Http\Middleware\VerifyUserCanViewAdminModule;
@@ -27,7 +28,7 @@ Route::middleware(['web'])->group(function () {
  * Module: Admin
  * Routes for basic functionality
  */
-Route::middleware(['web', VerifyUserCanViewAdminModule::class])->group(function () {
+Route::middleware(['web', 'auth', VerifyUserCanViewAdminModule::class])->group(function () {
 
     $adminRoutesPrefix = config('latus-routes.admin_routes_prefix');
 
