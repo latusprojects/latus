@@ -17,14 +17,23 @@ class WebController extends Controller
     )
     {
     }
-
-    public function showPage(WebPageRequest $request): Response|View
+    
+    public function showPage(WebPageRequest $request): View
     {
-        if (!($content = $request->getPageContent())) {
-            return response('Not Found', 404);
+        try {
+            /**
+             * @var ModuleComponent $module
+             */
+            $module = $this->componentService->getActiveModule(WebModule::class);
+        } catch (BindingResolutionException $e) {
+            abort(503);
         }
 
-        $page = $this->webModule->getPage('page');
+        if (!($content = $request->getPageContent())) {
+            abort(404);
+        }
+
+        $page = $module->getPage($content->type);
         $page->setContent($content);
 
         if (!($view = $page->resolvesView())) {
