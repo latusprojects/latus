@@ -4,6 +4,8 @@
 namespace Latus\Latus\Modules\Contracts;
 
 
-interface AuthModule
+use Latus\UI\Components\Contracts\ModuleComponent;
+
+interface AuthModule extends ModuleComponent
 {
 }
