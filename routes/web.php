@@ -46,8 +46,8 @@ Route::middleware(['web'])->group(function () {
     $authRoutesPrefix = config('latus-routes.auth_routes_prefix');
 
     Route::prefix($authRoutesPrefix)->group(function () {
-        Route::get('/login', [AuthController::class, 'showLogin']);
-        Route::get('/register', [AuthController::class, 'showRegister']);
-        Route::get('/multiFactorLogin', [AuthController::class, 'showMultiFactorLogin']);
+        Route::get('/login', [AuthController::class, 'showLogin'])->name('auth/login');
+        Route::get('/register', [AuthController::class, 'showRegister'])->name('auth/register');
+        Route::get('/multiFactorLogin', [AuthController::class, 'showMultiFactorLogin'])->name('auth/factor-login');
     });
 });
