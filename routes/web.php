@@ -34,6 +34,7 @@ Route::middleware(['web', 'auth', VerifyUserCanViewAdminModule::class])->group(f
 
     Route::prefix($adminRoutesPrefix)->group(function () {
         Route::get('/dashboard/overview', [DashboardController::class, 'showOverview']);
+        Route::get('', [DashboardController::class, 'showOverview']);
     });
 });
 
