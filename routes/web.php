@@ -34,6 +34,7 @@ Route::middleware(['web', 'auth', VerifyUserCanViewAdminModule::class])->group(f
 
     Route::prefix($adminRoutesPrefix)->group(function () {
         Route::get('/dashboard/overview', [DashboardController::class, 'showOverview']);
+        Route::get('', [DashboardController::class, 'showOverview']);
     });
 });
 
@@ -47,6 +48,7 @@ Route::middleware(['web'])->group(function () {
 
     Route::prefix($authRoutesPrefix)->group(function () {
         Route::get('/login', [AuthController::class, 'showLogin'])->name('auth/login');
+        Route::post('/submit', [AuthController::class, 'authenticate'])->name('auth/submit');
         Route::get('/register', [AuthController::class, 'showRegister'])->name('auth/register');
         Route::get('/multiFactorLogin', [AuthController::class, 'showMultiFactorLogin'])->name('auth/factor-login');
     });
