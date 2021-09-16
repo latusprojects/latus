@@ -48,6 +48,7 @@ Route::middleware(['web'])->group(function () {
 
     Route::prefix($authRoutesPrefix)->group(function () {
         Route::get('/login', [AuthController::class, 'showLogin'])->name('auth/login');
+        Route::post('/submit', [AuthController::class, 'authenticate'])->name('auth/submit');
         Route::get('/register', [AuthController::class, 'showRegister'])->name('auth/register');
         Route::get('/multiFactorLogin', [AuthController::class, 'showMultiFactorLogin'])->name('auth/factor-login');
     });
