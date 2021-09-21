@@ -48,69 +48,132 @@ class LatusServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../../config/routes.php', 'latus-routes');
     }
 
-    protected function getAdminNavItems(): array
-    {
-        return [
-            ['name' => 'dashboards', 'label' => 'nav.dashboards', 'permissions' => ['dashboard.overview'], 'items' => [
-                ['name' => 'dashboard.overview', 'label' => 'nav.dashboards.overview', 'permissions' => ['dashboard.overview'],
-                    'url' => url('/admin/dashboard/overview')],
-                ['name' => 'dashboard.statistics', 'label' => 'nav.dashboards.statistics', 'permissions' => ['dashboard.statistics'],
-                    'url' => url('/admin/dashboard/statistics')]
-            ]],
-
-            /* Group: userManagement */
-            ['name' => 'users', 'label' => 'nav.users', 'permissions' => ['user.index'], 'group' => 'userManagement', 'items' => [
-                ['name' => 'user.index', 'label' => 'nav.users.index', 'permissions' => ['user.index'],
-                    'url' => url('/admin/user/index')],
-                ['name' => 'user.create', 'label' => 'nav.users.create', 'permissions' => ['user.create'],
-                    'url' => url('/admin/user/create')],
-            ]],
-            ['name' => 'roles', 'label' => 'nav.roles', 'permissions' => ['role.index'], 'group' => 'userManagement', 'items' => [
-                ['name' => 'role.index', 'label' => 'nav.roles.index', 'permissions' => ['role.index'],
-                    'url' => url('/admin/role/index')],
-                ['name' => 'role.create', 'label' => 'nav.roles.create', 'permissions' => ['role.create'],
-                    'url' => url('/admin/role/create')],
-            ]],
-            ['name' => 'permissions', 'label' => 'nav.permissions', 'permissions' => ['permission.index'], 'group' => 'userManagement', 'items' => [
-                ['name' => 'permission.index', 'label' => 'nav.permissions.index', 'permissions' => ['permission.index'],
-                    'url' => url('/admin/permission/index')],
-                ['name' => 'permission.create', 'label' => 'nav.permissions.create', 'permissions' => ['permission.create'],
-                    'url' => url('/admin/permission/create')],
-            ]],
-
-            /* Group: packageManagement */
-            ['name' => 'plugins', 'label' => 'nav.plugins', 'permissions' => ['plugin.index'], 'group' => 'packageManagement', 'items' => [
-                ['name' => 'plugin.index', 'label' => 'nav.plugins.index', 'permissions' => ['plugin.index'],
-                    'url' => url('/admin/plugin/index')],
-                ['name' => 'plugin.create', 'label' => 'nav.plugins.create', 'permissions' => ['plugin.create'],
-                    'url' => url('/admin/plugin/create')],
-            ]],
-            ['name' => 'themes', 'label' => 'nav.themes', 'permissions' => ['theme.index'], 'group' => 'packageManagement', 'items' => [
-                ['name' => 'theme.index', 'label' => 'nav.themes.index', 'permissions' => ['theme.index'],
-                    'url' => url('/admin/theme/index')],
-                ['name' => 'theme.create', 'label' => 'nav.themes.create', 'permissions' => ['theme.create'],
-                    'url' => url('/admin/theme/create')],
-            ]],
-            ['name' => 'repositories', 'label' => 'nav.repositories', 'permissions' => ['repository.index'], 'group' => 'packageManagement', 'items' => [
-                ['name' => 'repository.index', 'label' => 'nav.repositories.index', 'permissions' => ['repository.index'],
-                    'url' => url('/admin/repository/index')],
-                ['name' => 'repository.create', 'label' => 'nav.repositories.create', 'permissions' => ['repository.create'],
-                    'url' => url('/admin/repository/create')],
-            ]],
-
-
-        ];
-    }
-
-    protected function fillAdminNav()
+    protected function buildAdminNav()
     {
 
         Event::listen(function (AdminNavDefined $event) {
 
-            foreach ($this->getAdminNavItems() as $item) {
-                $event->adminNav->getItems()->add($item);
-            }
+            $navBuilder = $event->adminNav->builder();
 
+            /* Group: Dashboards */
+            $navBuilder->group('dashboard', 'nav.dashboard')
+                /* dashboard/overview */
+                ->item('dashboard.overview')
+                ->setUrl(route('dashboard/overview'))
+                ->setIcon('app')
+                ->requireAuthorization('dashboard.overview')
+                /* dashboard/statistics */
+                ->parent()->item('dashboard.statistics')
+                ->setUrl(route('dashboard/statistics'))
+                ->setIcon('bar-chart-line')
+                ->requireAuthorization('dashboard.statistics');
+
+
+            /* Group: Content */
+            /* pages */
+            $navBuilder->group('content', 'nav.content')
+                ->append('dashboard')
+                ->item('content.pages')
+                ->setIcon('files')
+                ->requireAuthorization('content.page.index')
+                /* page/index */
+                ->subItem('content.page.index')
+                ->setUrl('')
+                ->setIcon('card-list')
+                ->requireAuthorization('content.page.index')
+                /* page/create */
+                ->parent()->subItem('content.page.create')
+                ->setUrl('')
+                ->setIcon('plus-circle')
+                ->requireAuthorization('content.page.create');
+
+            /* posts */
+            $navBuilder->group('content')
+                ->item('content.posts')
+                ->setIcon('newspaper')
+                ->requireAuthorization('content.post.index')
+                /* post/index */
+                ->subItem('content.post.index')
+                ->setUrl('')
+                ->setIcon('card-list')
+                ->requireAuthorization('content.post.index')
+                /* post/create */
+                ->parent()->subItem('content.post.create')
+                ->setUrl('')
+                ->setIcon('plus-circle')
+                ->requireAuthorization('content.post.create');
+
+            /* events */
+            $navBuilder->group('content')
+                ->item('content.events')
+                ->setIcon('calendar-event')
+                ->requireAuthorization('content.event.index')
+                /* event/index */
+                ->subItem('content.event.index')
+                ->setUrl('')
+                ->setIcon('card-list')
+                ->requireAuthorization('content.event.index')
+                /* event/create */
+                ->parent()->subItem('content.event.create')
+                ->setUrl('')
+                ->setIcon('plus-circle')
+                ->requireAuthorization('content.event.create');
+
+            /* settings */
+            $navBuilder->group('content')
+                ->item('content.settings')
+                ->setUrl('')
+                ->setIcon('sliders')
+                ->requireAuthorization('content.setting.index');
+
+            /* Group: Administration */
+            /* rolesAndUsers */
+            $navBuilder->group('administration', 'nav.administration')
+                ->append('content')
+                ->item('admin.rolesAndUsers')
+                ->setIcon('people')
+                ->requireAuthorization(['user.index', 'role.index'])
+                /* role/index */
+                ->subItem('role.index')
+                ->setUrl('')
+                ->setIcon('card-list')
+                ->requireAuthorization('role.index')
+                /* role/create */
+                ->parent()->subItem('role.create')
+                ->setUrl('')
+                ->setIcon('plus-circle')
+                ->requireAuthorization('role.create')
+                /* user/index */
+                ->parent()->subItem('user.index')
+                ->setUrl('')
+                ->setIcon('card-list')
+                ->requireAuthorization('user.index')
+                /* user/create */
+                ->parent()->subItem('user.create')
+                ->setUrl('')
+                ->setIcon('plus-circle')
+                ->requireAuthorization('user.create');
+
+            /* settingsAndPackages */
+            $navBuilder->group('administration')
+                ->item('admin.settingsAndPackages')
+                ->setIcon('gear')
+                ->requireAuthorization(['theme.index', 'plugin.index'])
+                /* plugin/index */
+                ->subItem('plugin.index')
+                ->setUrl('')
+                ->setIcon('card-list')
+                ->requireAuthorization('plugin.index')
+                /* theme/index */
+                ->parent()->subItem('theme.index')
+                ->setUrl('')
+                ->setIcon('card-list')
+                ->requireAuthorization('theme.index')
+                /* theme/index */
+                ->parent()->subItem('setting.index')
+                ->setUrl('')
+                ->setIcon('card-list')
+                ->requireAuthorization('setting.index');
         });
 
     }
@@ -125,6 +188,6 @@ class LatusServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'latus');
 
-        $this->fillAdminNav();
+        $this->buildAdminNav();
     }
 }
