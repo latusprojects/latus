@@ -95,6 +95,51 @@ class PermissionSeeder extends Seeder
         ['name' => 'repository.show', 'guard' => 'web'],
         ['name' => 'repository.edit', 'guard' => 'web'],
         ['name' => 'repository.destroy', 'guard' => 'web'],
+
+        /* Setting-Model */
+        ['name' => 'setting.*', 'guard' => 'web'],
+        ['name' => 'setting.index', 'guard' => 'web'],
+        ['name' => 'setting.create', 'guard' => 'web'],
+        ['name' => 'setting.show', 'guard' => 'web'],
+        ['name' => 'setting.edit', 'guard' => 'web'],
+        ['name' => 'setting.destroy', 'guard' => 'web'],
+
+        /* Content-Model and sub-types */
+        ['name' => 'content.*', 'guard' => 'web'],
+        /* Content Settings */
+        ['name' => 'content.setting.*', 'guard' => 'web'],
+        ['name' => 'content.setting.index', 'guard' => 'web'],
+        ['name' => 'content.setting.create', 'guard' => 'web'],
+        ['name' => 'content.setting.show', 'guard' => 'web'],
+        ['name' => 'content.setting.edit', 'guard' => 'web'],
+        ['name' => 'content.setting.destroy', 'guard' => 'web'],
+        /* Content Page-Type */
+        ['name' => 'content.page.*', 'guard' => 'web'],
+        ['name' => 'content.page.index', 'guard' => 'web'],
+        ['name' => 'content.page.create', 'guard' => 'web'],
+        ['name' => 'content.page.show', 'guard' => 'web'],
+        ['name' => 'content.page.edit', 'guard' => 'web'],
+        ['name' => 'content.page.destroy', 'guard' => 'web'],
+        /* Content Post-Type */
+        ['name' => 'content.post.*', 'guard' => 'web'],
+        ['name' => 'content.post.index', 'guard' => 'web'],
+        ['name' => 'content.post.create', 'guard' => 'web'],
+        ['name' => 'content.post.show', 'guard' => 'web'],
+        ['name' => 'content.post.edit', 'guard' => 'web'],
+        ['name' => 'content.post.destroy', 'guard' => 'web'],
+        /* Content Event-Type */
+        ['name' => 'content.event.*', 'guard' => 'web'],
+        ['name' => 'content.event.index', 'guard' => 'web'],
+        ['name' => 'content.event.create', 'guard' => 'web'],
+        ['name' => 'content.event.show', 'guard' => 'web'],
+        ['name' => 'content.event.edit', 'guard' => 'web'],
+        ['name' => 'content.event.destroy', 'guard' => 'web'],
+
+        /* Navigation-Groups */
+        ['name' => 'nav.*', 'guard' => 'web'],
+        ['name' => 'nav.dashboard', 'guard' => 'web'],
+        ['name' => 'nav.content', 'guard' => 'web'],
+        ['name' => 'nav.administration', 'guard' => 'web'],
     ];
 
     /**
