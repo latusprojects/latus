@@ -41,7 +41,7 @@ class AdminController extends Controller
                 $this->adminNav->setReference($reference);
             }
 
-            $pageView = $module->getPage('page')->resolvesView()->with(['admin-nav' => app()->make('admin-nav'), 'content' => $viewTarget->render()]);
+            $pageView = $module->getPage('page')->resolvesView()->with(['admin-nav' => app()->make(AdminNav::class), 'content' => $viewTarget->render()]);
         } catch (\Throwable $e) {
             abort(503);
         }
