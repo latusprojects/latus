@@ -23,4 +23,18 @@ class DashboardController extends AdminController
 
         return $this->returnView(\view('latus::admin.dashboard.overview'), 'dashboard.overview');
     }
+
+    /**
+     * Show the statistics dashboard.
+     *
+     * @return View
+     *
+     * @throws AuthorizationException
+     */
+    public function showStatistics(): View
+    {
+        $this->authorize('view', [Dashboard::class, 'statistics']);
+
+        return $this->returnView(\view('latus::admin.dashboard.statistics'), 'dashboard.statistics');
+    }
 }

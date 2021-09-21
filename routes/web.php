@@ -33,8 +33,9 @@ Route::middleware(['web', 'auth', VerifyUserCanViewAdminModule::class])->group(f
     $adminRoutesPrefix = config('latus-routes.admin_routes_prefix');
 
     Route::prefix($adminRoutesPrefix)->group(function () {
-        Route::get('/dashboard/overview', [DashboardController::class, 'showOverview']);
-        Route::get('', [DashboardController::class, 'showOverview']);
+        Route::get('/dashboard/overview', [DashboardController::class, 'showOverview'])->name('dashboard/overview');
+        Route::get('/dashboard/statistics', [DashboardController::class, 'showStatistics'])->name('dashboard/statistics');
+        Route::get('', [DashboardController::class, 'showOverview'])->name('admin');
     });
 });
 
