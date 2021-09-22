@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Latus\Database\Seeders\DatabaseSeeder;
 use Latus\Installer\Providers\Traits\RegistersSeeders;
+use Latus\Laravel\Http\Middleware\BuildPackageDependencies;
 use Latus\Latus\Http\Controllers\AdminController;
 use Latus\Latus\Http\Controllers\AuthController;
 use Latus\Latus\Http\Controllers\WebController;
@@ -14,6 +15,7 @@ use Latus\Latus\Modules\Contracts\AuthModule;
 use Latus\Latus\Modules\Contracts\WebModule;
 use Latus\UI\Events\AdminNavDefined;
 use Latus\UI\Providers\Traits\DefinesModules;
+use Latus\UI\Widgets\AdminNav;
 
 class LatusServiceProvider extends ServiceProvider
 {
@@ -44,6 +46,13 @@ class LatusServiceProvider extends ServiceProvider
                 'controller' => WebController::class,
             ],
         ]);
+
+        BuildPackageDependencies::addDependencyClosure(function () {
+
+            app()->singleton(AdminNav::class, AdminNav::class);
+
+            AdminNavDefined::dispatch(app(AdminNav::class));
+        });
 
         $this->mergeConfigFrom(__DIR__ . '/../../config/routes.php', 'latus-routes');
     }
