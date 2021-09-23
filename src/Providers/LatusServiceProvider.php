@@ -196,6 +196,7 @@ class LatusServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'latus');
+        $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'latus');
 
         $this->buildAdminNav();
     }
