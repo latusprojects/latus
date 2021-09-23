@@ -27,7 +27,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
 
-        Route::model('page', Page::class, function (int|string $pageId) {
+        Route::bind('page', function (int|string $pageId) {
             /**
              * @var ContentService $contentService
              */
@@ -35,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
             $page = $contentService->find($pageId);
 
             if (!$page || $page->type !== 'page') {
-                return null;
+                abort(404);
             }
             return $page;
         });
