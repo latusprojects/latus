@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Latus\Latus\Http\Controllers\AuthController;
 use Latus\Latus\Http\Controllers\DashboardController;
+use Latus\Latus\Http\Controllers\PageController;
 use Latus\Latus\Http\Controllers\WebController;
 use Latus\Latus\Http\Middleware\VerifyUserCanViewAdminModule;
 
@@ -35,6 +36,9 @@ Route::middleware(['web', 'auth', VerifyUserCanViewAdminModule::class])->group(f
     Route::prefix($adminRoutesPrefix)->group(function () {
         Route::get('/dashboard/overview', [DashboardController::class, 'showOverview'])->name('dashboard/overview');
         Route::get('/dashboard/statistics', [DashboardController::class, 'showStatistics'])->name('dashboard/statistics');
+
+        Route::resource('pages', PageController::class);
+
         Route::get('', [DashboardController::class, 'showOverview'])->name('admin');
     });
 });

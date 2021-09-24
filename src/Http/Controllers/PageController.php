@@ -24,7 +24,7 @@ class PageController extends AdminController
     public function index(ContentService $contentService): View
     {
         return $this->returnView(view('latus::admin.content.page.index')->with(['pages' => $contentService->paginateContent('page', 15,
-            function (Page $page) {
+            function ($page) {
                 return auth()->user()->can('view', $page);
             }
         )]), 'content.page.index');
