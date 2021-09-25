@@ -31,7 +31,7 @@ class RouteServiceProvider extends ServiceProvider
             /**
              * @var ContentService $contentService
              */
-            $contentService = app(ContentService::class);
+            $contentService = app(ContentService::class, ['relatedModel' => new Page()]);
             $page = $contentService->find($pageId);
 
             if (!$page || $page->type !== 'page') {
