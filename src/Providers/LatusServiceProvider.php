@@ -87,12 +87,12 @@ class LatusServiceProvider extends ServiceProvider
                 ->requireAuthorization('content.page.index')
                 /* page/index */
                 ->subItem('content.page.index')
-                ->setUrl('')
+                ->setUrl(route('pages.index'))
                 ->setIcon('card-list')
                 ->requireAuthorization('content.page.index')
                 /* page/create */
                 ->parent()->subItem('content.page.create')
-                ->setUrl('')
+                ->setUrl(route('pages.create'))
                 ->setIcon('plus-circle')
                 ->requireAuthorization('content.page.create');
 
