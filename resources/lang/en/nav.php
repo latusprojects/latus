@@ -37,4 +37,10 @@ return [
         'plugin.index' => 'Plugins',
         'theme.index' => 'Themes & Design',
         'setting.index' => 'Configuration',
+    ]
+    +
+    [
+        'context.view' => 'View',
+        'context.edit' => 'Edit',
+        'context.delete' => 'Delete'
     ];
