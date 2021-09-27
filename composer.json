@@ -1,6 +1,6 @@
 {
   "name": "latusprojects/latus",
-  "type": "library",
+  "type": "metapackage",
   "description": "",
   "authors": [
     {
@@ -25,31 +25,6 @@
     "phpunit/phpunit": "^9.5.0",
     "orchestra/testbench": "v6.19.0",
     "nunomaduro/larastan": "^0.7.12"
-  },
-  "autoload": {
-    "psr-4": {
-      "Latus\\Latus\\": "src/",
-      "Latus\\Database\\Seeders\\": "database/seeders/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Latus\\Latus\\Tests\\": "tests/"
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Latus\\Latus\\Providers\\LatusServiceProvider",
-        "Latus\\Latus\\Providers\\RouteServiceProvider",
-        "Latus\\Latus\\Providers\\AuthServiceProvider"
-      ]
-    }
-  },
-  "scripts": {
-    "post-autoload-dump": [
-      "@php ./vendor/bin/testbench package:discover --ansi"
-    ]
   },
   "repositories": {
     "0": {
