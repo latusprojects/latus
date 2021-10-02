@@ -11,14 +11,14 @@
   "require": {
     "php": "^8.0",
     "laravel/framework": "8.*",
-    "latusprojects/latus-plugins": "^0.2.5",
-    "latusprojects/latus-model-repositories": "^0.1.1",
-    "latusprojects/latus-permissions": "^0.2.5",
-    "latusprojects/latus-installer": "^0.1.22",
-    "latusprojects/latus-ui": "^0.1.23",
-    "latusprojects/latus-content": "0.1.*",
-    "latusprojects/latus-composer-plugins": "^0.2.3",
-    "latusprojects/latus-laravel-application": "^0.1.7",
+    "latusprojects/latus-plugins": "^0.2.6",
+    "latusprojects/latus-model-repositories": "^0.1.2",
+    "latusprojects/latus-permissions": "^0.2.7",
+    "latusprojects/latus-installer": "^0.2.0",
+    "latusprojects/latus-ui": "^0.1.36",
+    "latusprojects/latus-content": "^0.1.6",
+    "latusprojects/latus-composer-plugins": "^0.2.10",
+    "latusprojects/latus-laravel-application": "^0.1.9",
     "latusprojects/latus-permalink": "^0.1.1"
   },
   "require-dev": {
