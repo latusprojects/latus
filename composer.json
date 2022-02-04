@@ -32,5 +32,10 @@
       "url": "https://latusprojects.repo.repman.io"
     }
   },
+  "extra": {
+    "branch-alias": {
+      "dev-develop": "0.2.x-dev"
+    }
+  },
   "minimum-stability": "dev"
 }
