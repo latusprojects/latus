@@ -26,16 +26,5 @@
     "orchestra/testbench": "v6.19.0",
     "nunomaduro/larastan": "^0.7.12"
   },
-  "repositories": {
-    "0": {
-      "type": "composer",
-      "url": "https://latusprojects.repo.repman.io"
-    }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-develop": "0.2.x-dev"
-    }
-  },
   "minimum-stability": "dev"
 }
